@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "765516774897",
+    "project_id": "wellhelp",
+    "storage_bucket": "wellhelp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765516774897:android:67928a76b3ed01ca805850",
+        "android_client_info": {
+          "package_name": "com.example.wellhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765516774897-b4tvrek19akkmj99cknq3ekdhlef0ob3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvq22jSDHKxskrcc4o5WrT9UUmobYWrX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "765516774897-b4tvrek19akkmj99cknq3ekdhlef0ob3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
