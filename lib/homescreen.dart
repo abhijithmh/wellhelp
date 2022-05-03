@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wellhelp/colors.dart';
+import 'package:wellhelp/login.dart';
 import 'package:wellhelp/moods.dart';
 
 class homeScreen extends StatefulWidget {
-  const homeScreen({Key? key}) : super(key: key);
+  final name;
+  const homeScreen({Key? key, required this.name}) : super(key: key);
 
   @override
   State<homeScreen> createState() => _homeScreenState();
@@ -79,6 +81,12 @@ class _homeScreenState extends State<homeScreen> {
     );
   }
 
+  FloatingActionButton _floatingActionButton() {
+    return FloatingActionButton(
+      onPressed: () {},
+    );
+  }
+
   Container _backBgCover() {
     return Container(
       height: 260.0,
@@ -99,9 +107,9 @@ class _homeScreenState extends State<homeScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           Text(
-            'Hi USER',
+            'Hi '+widget.name,
             style: TextStyle(
               fontSize: 36,
               fontWeight: FontWeight.w500,
@@ -111,13 +119,28 @@ class _homeScreenState extends State<homeScreen> {
           SizedBox(
             height: 10,
           ),
-          Text(
-            'How are you feeling today ?',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w300,
-              color: Colors.white,
-            ),
+          Row(
+            children: [
+              Text(
+                'How are you feeling today ?',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              FloatingActionButton(
+                child: Icon(Icons.account_box),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
+                    return loginScreen();
+                  }));
+                },
+              ),
+            ],
           ),
         ],
       ),
@@ -166,7 +189,8 @@ class _homeScreenState extends State<homeScreen> {
       child: Row(
         children: <Widget>[
           CircleAvatar(
-            backgroundImage: NetworkImage('https://png.pngtree.com/png-clipart/20210905/original/pngtree-red-warning-sign-icon-png-image_6686804.jpg'),
+            backgroundImage: NetworkImage(
+                'https://png.pngtree.com/png-clipart/20210905/original/pngtree-red-warning-sign-icon-png-image_6686804.jpg'),
             backgroundColor: Color(0xFFD9D9D9),
             radius: 36.0,
           ),
@@ -178,7 +202,8 @@ class _homeScreenState extends State<homeScreen> {
               StreamBuilder(
                   stream:
                       FirebaseFirestore.instance.collection('well').snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot<Map>> snapshot) {
+                  builder:
+                      (context, AsyncSnapshot<QuerySnapshot<Map>> snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
                     } else {
@@ -187,7 +212,17 @@ class _homeScreenState extends State<homeScreen> {
                       double oxy_sat = double.parse(Oxy_sat);
 
                       if (oxy_sat < 94) {
-                        return Text('limit');
+                        return RichText(
+                          text: TextSpan(
+                            text: 'Low Blood oxygen level detected',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              height: 1.5,
+                            ),
+                          ),
+                        );
                       } else {
                         return Container();
                       }
@@ -196,13 +231,17 @@ class _homeScreenState extends State<homeScreen> {
               StreamBuilder(
                   stream:
                       FirebaseFirestore.instance.collection('well').snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot<Map>> snapshot) {
+                  builder:
+                      (context, AsyncSnapshot<QuerySnapshot<Map>> snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
                     } else {
                       String GasValue =
                           snapshot.data!.docs.elementAt(0).get('gas_value');
                       double gasvalue = double.parse(GasValue);
+                      String Oxy_sat =
+                          snapshot.data!.docs.elementAt(0).get('oxy_sat');
+                      double oxy_sat = double.parse(Oxy_sat);
 
                       if (gasvalue > 0) {
                         return RichText(
@@ -214,9 +253,10 @@ class _homeScreenState extends State<homeScreen> {
                               fontWeight: FontWeight.w600,
                               height: 1.5,
                             ),
-
                           ),
                         );
+                      } else if (oxy_sat < 94 && gasvalue <= 0) {
+                        return Container();
                       } else {
                         return RichText(
                           text: TextSpan(
@@ -227,7 +267,6 @@ class _homeScreenState extends State<homeScreen> {
                               fontWeight: FontWeight.w600,
                               height: 1.5,
                             ),
-
                           ),
                         );
                       }
@@ -338,14 +377,6 @@ class _homeScreenState extends State<homeScreen> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    TextSpan(
-                                      text: '\n\nDescription',
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),
@@ -428,14 +459,6 @@ class _homeScreenState extends State<homeScreen> {
                                         color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: '\n\nDescription',
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
                                       ),
                                     ),
                                   ],
@@ -522,14 +545,6 @@ class _homeScreenState extends State<homeScreen> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    TextSpan(
-                                      text: '\n\nDescription',
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),
@@ -614,14 +629,6 @@ class _homeScreenState extends State<homeScreen> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    TextSpan(
-                                      text: '\n\nDescription',
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),
@@ -704,14 +711,6 @@ class _homeScreenState extends State<homeScreen> {
                                         color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: '\n\nDescription',
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
                                       ),
                                     ),
                                   ],
