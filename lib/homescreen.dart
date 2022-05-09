@@ -110,18 +110,18 @@ class _homeScreenState extends State<homeScreen> {
         children: <Widget>[
           Text(
             'Hi '+widget.name,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 36,
               fontWeight: FontWeight.w500,
               color: Colors.white,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 'How are you feeling today ?',
                 style: TextStyle(
                   fontSize: 20,
@@ -129,11 +129,11 @@ class _homeScreenState extends State<homeScreen> {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               FloatingActionButton(
-                child: Icon(Icons.account_box),
+                child: const Icon(Icons.account_box),
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
                     return loginScreen();
@@ -188,13 +188,13 @@ class _homeScreenState extends State<homeScreen> {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          CircleAvatar(
+          const CircleAvatar(
             backgroundImage: NetworkImage(
                 'https://png.pngtree.com/png-clipart/20210905/original/pngtree-red-warning-sign-icon-png-image_6686804.jpg'),
             backgroundColor: Color(0xFFD9D9D9),
             radius: 36.0,
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
           Column(
@@ -207,13 +207,13 @@ class _homeScreenState extends State<homeScreen> {
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
                     } else {
-                      String Oxy_sat =
+                      String OxySat =
                           snapshot.data!.docs.elementAt(0).get('oxy_sat');
-                      double oxy_sat = double.parse(Oxy_sat);
+                      double oxySat = double.parse(OxySat);
 
-                      if (oxy_sat < 94) {
+                      if (oxySat < 94) {
                         return RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                             text: 'Low Blood oxygen level detected',
                             style: TextStyle(
                               color: Colors.black,
@@ -238,14 +238,13 @@ class _homeScreenState extends State<homeScreen> {
                     } else {
                       String GasValue =
                           snapshot.data!.docs.elementAt(0).get('gas_value');
-                      double gasvalue = double.parse(GasValue);
-                      String Oxy_sat =
+                      String OxySat =
                           snapshot.data!.docs.elementAt(0).get('oxy_sat');
-                      double oxy_sat = double.parse(Oxy_sat);
+                      double oxySat = double.parse(OxySat);
 
-                      if (gasvalue > 0) {
+                      if (GasValue == 'Danger') {
                         return RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                             text: 'High Poisonous Gas concentration Detected',
                             style: TextStyle(
                               color: Colors.black,
@@ -255,11 +254,11 @@ class _homeScreenState extends State<homeScreen> {
                             ),
                           ),
                         );
-                      } else if (oxy_sat < 94 && gasvalue <= 0) {
+                      } else if (oxySat < 94 && GasValue == 'Normal') {
                         return Container();
                       } else {
                         return RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                             text: 'No Alert',
                             style: TextStyle(
                               color: Colors.black,
@@ -281,11 +280,11 @@ class _homeScreenState extends State<homeScreen> {
 
   Widget _nextAppointmentText() {
     return Container(
-      margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
+      margin: const EdgeInsets.only(top: 20.0, bottom: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'ALERT BOX',
             style: TextStyle(
               fontSize: 18,
