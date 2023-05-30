@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MoodsSelector extends StatefulWidget {
-  MoodsSelector({Key? key}) : super(key: key);
+  const MoodsSelector({Key? key}) : super(key: key);
 
   @override
   _MoodsSelectorState createState() => _MoodsSelectorState();
@@ -19,6 +19,21 @@ class _MoodsSelectorState extends State<MoodsSelector> {
         borderColor: Colors.transparent,
         renderBorder: false,
         fillColor: Colors.transparent,
+        isSelected: isSelected,
+        onPressed: (int index) {
+          setState(() {
+            for (int buttonIndex = 0;
+            buttonIndex < isSelected.length;
+            buttonIndex++) {
+              if (buttonIndex == index) {
+                isSelected[buttonIndex] = true;
+                ind = index;
+              } else {
+                isSelected[buttonIndex] = false;
+              }
+            }
+          });
+        },
         children: const <Widget>[
           Icon(
             Icons.sentiment_very_dissatisfied,
@@ -50,21 +65,6 @@ class _MoodsSelectorState extends State<MoodsSelector> {
             size: 36,
           ),
         ],
-        isSelected: isSelected,
-        onPressed: (int index) {
-          setState(() {
-            for (int buttonIndex = 0;
-            buttonIndex < isSelected.length;
-            buttonIndex++) {
-              if (buttonIndex == index) {
-                isSelected[buttonIndex] = true;
-                ind = index;
-              } else {
-                isSelected[buttonIndex] = false;
-              }
-            }
-          });
-        },
       ),
     );
   }

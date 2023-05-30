@@ -201,14 +201,14 @@ class _homeScreenState extends State<homeScreen> {
             children: [
               StreamBuilder(
                   stream:
-                      FirebaseFirestore.instance.collection('well').snapshots(),
+                  FirebaseFirestore.instance.collection('well').snapshots(),
                   builder:
                       (context, AsyncSnapshot<QuerySnapshot<Map>> snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
                     } else {
                       String OxySat =
-                          snapshot.data!.docs.elementAt(0).get('oxy_sat');
+                      snapshot.data!.docs.elementAt(0).get('oxy_sat');
                       double oxySat = double.parse(OxySat);
 
                       if (oxySat < 94) {
@@ -230,16 +230,16 @@ class _homeScreenState extends State<homeScreen> {
                   }),
               StreamBuilder(
                   stream:
-                      FirebaseFirestore.instance.collection('well').snapshots(),
+                  FirebaseFirestore.instance.collection('well').snapshots(),
                   builder:
                       (context, AsyncSnapshot<QuerySnapshot<Map>> snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
                     } else {
                       String GasValue =
-                          snapshot.data!.docs.elementAt(0).get('gas_value');
+                      snapshot.data!.docs.elementAt(0).get('gas_value');
                       String OxySat =
-                          snapshot.data!.docs.elementAt(0).get('oxy_sat');
+                      snapshot.data!.docs.elementAt(0).get('oxy_sat');
                       double oxySat = double.parse(OxySat);
 
                       if (GasValue == 'Danger') {
@@ -325,7 +325,7 @@ class _homeScreenState extends State<homeScreen> {
             String oxysat = snapshot.data!.docs.elementAt(0).get("oxy_sat");
             String pulse = snapshot.data!.docs.elementAt(0).get("pulse");
             String temperature =
-                snapshot.data!.docs.elementAt(0).get("temperature");
+            snapshot.data!.docs.elementAt(0).get("temperature");
             return Column(
               children: [
                 Container(
@@ -383,30 +383,14 @@ class _homeScreenState extends State<homeScreen> {
                           ),
                         ],
                       ),
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: const BoxDecoration(
-                            gradient: purpleGradient,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(80.0)),
-                          ),
-                          child: Container(
-                            constraints: const BoxConstraints(
-                                minWidth: 88.0, minHeight: 36.0),
-                            // min sizes for Material buttons
-                            alignment: Alignment.center,
-                            child: Text(
-                              altitude + ' m',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                  color: Colors.white),
-                            ),
-                          ),
+                        child: Text(
+                          altitude + ' m',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              color: Colors.white),
                         ),
                       ),
                     ],
@@ -467,117 +451,88 @@ class _homeScreenState extends State<homeScreen> {
                           ),
                         ],
                       ),
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: const BoxDecoration(
-                            gradient: purpleGradient,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(80.0)),
-                          ),
-                          child: Container(
-                            constraints: const BoxConstraints(
-                                minWidth: 88.0, minHeight: 36.0),
-                            // min sizes for Material buttons
-                            alignment: Alignment.center,
-                            child: Text(
-                              gasvalue,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                  color: Colors.white),
-                            ),
-                          ),
+                        child: Text(
+                          gasvalue,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              color: Colors.white),
                         ),
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 14.0, horizontal: 18.0),
-                  margin: const EdgeInsets.only(
-                    bottom: 20.0,
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 1.0,
-                          blurRadius: 6.0,
-                        ),
-                      ]),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const CircleAvatar(
-                            backgroundColor: Color(0xFFD9D9D9),
-                            backgroundImage: NetworkImage(
-                                'https://media.istockphoto.com/vectors/pulse-oximeter-finger-medical-device-icon-corona-virus-covid-protect-vector-id1218905934?k=20&m=1218905934&s=612x612&w=0&h=UnY9R8QhqzPKNEVt5O7NZhmomrEM8G8DmgU-QP4CtZQ='),
-                            radius: 36.0,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 14.0, horizontal: 18.0),
+                    margin: const EdgeInsets.only(
+                      bottom: 20.0,
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 1.0,
+                            blurRadius: 6.0,
                           ),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              RichText(
-                                text: const TextSpan(
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: 'OXYGEN SATURATION',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      RaisedButton(
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: const BoxDecoration(
-                            gradient: purpleGradient,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(80.0)),
-                          ),
-                          child: Container(
-                            constraints: const BoxConstraints(
-                                minWidth: 88.0, minHeight: 36.0),
-                            // min sizes for Material buttons
-                            alignment: Alignment.center,
-                            child: Text(
-                              oxysat + ' %',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                  color: Colors.white),
+                        ]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const CircleAvatar(
+                              backgroundColor: Color(0xFFD9D9D9),
+                              backgroundImage: NetworkImage(
+                                  'https://media.istockphoto.com/vectors/pulse-oximeter-finger-medical-device-icon-corona-virus-covid-protect-vector-id1218905934?k=20&m=1218905934&s=612x612&w=0&h=UnY9R8QhqzPKNEVt5O7NZhmomrEM8G8DmgU-QP4CtZQ='),
+                              radius: 36.0,
                             ),
+                            const SizedBox(
+                              width: 10.0,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                RichText(
+                                  text: const TextSpan(
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'OXYGEN SATURATION ',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            oxysat + ' %',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: Colors.white),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -635,29 +590,18 @@ class _homeScreenState extends State<homeScreen> {
                           ),
                         ],
                       ),
-                      RaisedButton(
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: const BoxDecoration(
-                            gradient: purpleGradient,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(80.0)),
-                          ),
-                          child: Container(
-                            constraints: const BoxConstraints(
-                                minWidth: 88.0, minHeight: 36.0),
-                            // min sizes for Material buttons
-                            alignment: Alignment.center,
-                            child: Text(
-                              pulse + ' bpm',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                  color: Colors.white),
-                            ),
+                      Container(
+                        constraints: const BoxConstraints(
+                            minWidth: 88.0, minHeight: 36.0),
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            pulse + ' bpm',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: Colors.white),
                           ),
                         ),
                       ),
@@ -719,30 +663,14 @@ class _homeScreenState extends State<homeScreen> {
                           ),
                         ],
                       ),
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: const BoxDecoration(
-                            gradient: purpleGradient,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(80.0)),
-                          ),
-                          child: Container(
-                            constraints: const BoxConstraints(
-                                minWidth: 88.0, minHeight: 36.0),
-                            // min sizes for Material buttons
-                            alignment: Alignment.center,
-                            child: Text(
-                              temperature + ' °C',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                  color: Colors.white),
-                            ),
-                          ),
+                        child: Text(
+                          temperature + ' °C',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              color: Colors.white),
                         ),
                       ),
                     ],
